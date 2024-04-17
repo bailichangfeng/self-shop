@@ -1,3 +1,5 @@
+import { ShopUserInfo } from "@/api/interface/shop";
+
 export type LayoutType = "vertical" | "classic" | "transverse" | "columns";
 
 export type AssemblySizeType = "large" | "default" | "small";
@@ -27,7 +29,14 @@ export interface GlobalState {
 
 /* UserState */
 export interface UserState {
-  userInfo: { name: string; userId: number | null };
+  userInfo: { realname: string; bdcId: string | null };
+  token: string | null;
+}
+
+export interface ShopState {
+  count: number;
+
+  shopUserInfo: ShopUserInfo;
 }
 
 /* tabsMenuProps */

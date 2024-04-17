@@ -51,6 +51,6 @@ export default defineConfig({
   ],
   server: {
     host: "0.0.0.0",
-    port: 8080 //启动端口
+    port: 4002 //启动端口
   }
 });
