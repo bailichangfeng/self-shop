@@ -24,10 +24,10 @@
 <script setup>
 import { onMounted } from "vue";
 import { useRoute } from "vue-router";
-import useShopInfo from "@/store/modules/shop";
+import useShopStore from "@/store/modules/shop";
 import { getLocal } from "@/utils";
 const route = useRoute();
-const cart = useShopInfo();
+const cart = useShopStore();
 
 onMounted(() => {
   const token = getLocal("token");
@@ -79,3 +79,4 @@ onMounted(() => {
   }
 }
 </style>
+@/store/modules/user

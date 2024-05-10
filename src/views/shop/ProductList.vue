@@ -45,7 +45,7 @@
 <script setup>
 import { reactive } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { search } from "@/service/good";
+import { search } from "@/api/shop";
 const route = useRoute();
 const router = useRouter();
 const state = reactive({

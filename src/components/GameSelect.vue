@@ -17,8 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive } from "vue";
-import useUserStore from "@/store/modules/user";
+import { reactive } from "vue";
 interface GameOptions {
   label: string;
   value: number;
@@ -34,7 +33,7 @@ interface GameOptions {
     icon: string;
   }[];
 }
-const userStore = useUserStore();
+const completeAppkey = "";
 let options = reactive<GameOptions[]>([]);
 let optionscopy = reactive<GameOptions[]>([
   {
@@ -67,21 +66,14 @@ let optionscopy = reactive<GameOptions[]>([
   }
 ]);
 
-const completeAppkey = computed(() => {
-  return userStore.userInfo.name ? [userStore.userInfo.name.split("-")[0], userStore.userInfo.name.split("-")[1]] : [];
-});
-
 const handleSelect = async (val: string) => {
   console.log("选择了什么游戏", val);
   // 设置运营管理模块的环境变量为空
   // if(this.$route.meta.menuName==='operate'){
 };
 
-const remoteMethod = (node, query: string) => {
+const remoteMethod = (node: any, query: string) => {
   options = [];
-  console.log(node);
-  console.log(query);
-
   const value = query.toLowerCase().replace(new RegExp("^\\s*|\\s*$", "g"), ""); // 转小写 去两头空格
   return String(node.text).toLowerCase().indexOf(value) > -1;
   // if (value) {
@@ -125,3 +117,4 @@ const visibleChange = (val: boolean) => {
   }
 }
 </style>
+@/store/modules/user

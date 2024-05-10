@@ -16,7 +16,3 @@ const home = () => {
   router.push("/home");
 };
 </script>
-
-<style scoped>
-/* @import "./index.scss"; */
-</style>

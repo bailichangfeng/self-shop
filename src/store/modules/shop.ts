@@ -1,32 +1,23 @@
 import { defineStore } from "pinia";
 import { ShopState } from "../interface";
-import { ShopUserInfo } from "@/api/interface/shop";
 
-import { getCart, getShopUser } from "@/api/shop";
+import { getCart } from "@/api/shop/index";
 
-const useShopInfo = defineStore("shopInfo", {
+// import piniaPersistConfig from "../helper/persist";
+
+const useShopStore = defineStore("shopInfo", {
   state: (): ShopState => ({
-    count: 0,
-    shopUserInfo: {
-      introduceSign: "",
-      loginName: "",
-      nickName: ""
-    }
+    count: 0
   }),
 
   actions: {
     async updateCart() {
-      const { data = [] } = await getCart<Array<string>>();
+      const { data = [] } = await getCart<Array<string>>({});
       this.count = data.length;
-    },
-
-    async getShopUserInfo() {
-      if (!this.shopUserInfo.loginName) {
-        const { data } = await getShopUser<ShopUserInfo>();
-        this.shopUserInfo = data;
-      }
     }
   }
+
+  // persist: piniaPersistConfig()
 });
 
-export default useShopInfo;
+export default useShopStore;

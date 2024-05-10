@@ -9,14 +9,11 @@ declare namespace Menu {
     children?: MenuOptions[];
   }
   interface MetaProps {
-    icon: string;
     title: string;
     activeMenu?: string;
     isLink?: string;
-    isHide: boolean;
-    isFull: boolean;
-    isAffix: boolean;
-    isKeepAlive: boolean;
+    layout?: string;
+    siderbarGroup?: number;
   }
 }
 

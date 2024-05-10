@@ -1,49 +1,39 @@
 import { defineStore } from "pinia";
-import { UserState } from "../interface";
+import { ShopUserState } from "../interface";
+
+import { ShopUserInfo } from "@/api/interface/shop";
 import { LoginInfo, RegisterInfo } from "@/api/interface/shop";
-import { getUserInfo, login, register } from "@/api/user";
-import { setLocal } from "@/utils";
+
+// import { login, register } from "@/api/shopUser/index";
+import { getShopUser, login, register } from "@/api/shop/index";
+
 import router from "@/router";
+import { setLocal } from "@/utils";
 import piniaPersistConfig from "../helper/persist";
-// 第一个参数是应用程序中 store 的唯一 id
-const useUserStore = defineStore("user", {
-  state: (): UserState => {
-    return {
-      userInfo: {
-        realname: "",
-        bdcId: null
-      },
 
-      token: ""
-    };
-  },
+const useUserStore = defineStore("userInfo", {
+  state: (): ShopUserState => ({
+    token: "",
+    shopUserInfo: {
+      introduceSign: "",
+      loginName: "",
+      nickName: ""
+    }
+  }),
 
-  getters: {
-    userNameGet: state => state.userInfo.realname
-  },
-
-  // other options...
   actions: {
-    async getUserInfo() {
-      // 可以返回一个 Promise
-      await getUserInfo<UserState["userInfo"]>({ type: "custom" }).then(res => {
-        console.log(res);
-        const info = { realname: res.data.realname, bdcId: res.data.bdcId };
-        this.setBdcUserInfo(info);
-      });
-    },
-
-    setBdcUserInfo(userInfo: UserState["userInfo"]) {
-      this.userInfo = userInfo;
+    async getShopUserInfo() {
+      if (!this.shopUserInfo.loginName) {
+        const { data } = await getShopUser<ShopUserInfo>();
+        this.shopUserInfo = data;
+      }
     },
 
     async login(loginInfo: LoginInfo) {
       await login<string>(loginInfo).then(res => {
-        console.log(res);
         if (res.resultCode == "200") {
           setLocal("token", res.data);
           this.token = res.data;
-          console.log(router);
           router.push("/home");
         }
       });
@@ -51,12 +41,23 @@ const useUserStore = defineStore("user", {
 
     async register(RegisterInfo: RegisterInfo) {
       await register<string>(RegisterInfo).then(res => {
-        console.log(res);
+        console.log("注册", res);
       });
+    },
+
+    logout() {
+      setLocal("token", "");
+      this.token = "";
+      this.shopUserInfo = {
+        introduceSign: "",
+        loginName: "",
+        nickName: ""
+      };
+      router.push("/login");
     }
   },
 
-  persist: piniaPersistConfig("user", ["token"])
+  persist: piniaPersistConfig("shopUser", ["token"])
 });
 
 export default useUserStore;

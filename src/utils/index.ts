@@ -4240,6 +4240,8 @@ tdist.getLev1 = function () {
   for (let e = 1; e < 100; e++) {
     let i = "0000";
     i = e < 10 ? "0" + e + i : e + i;
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     const n = this[i];
     "undefined" != typeof n &&
       t.push({
@@ -4250,12 +4252,16 @@ tdist.getLev1 = function () {
   return t;
 };
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 tdist.getLev2 = function (t) {
   if ("" == t) return [];
   const e = [];
   for (let i = 1; i < 100; i++) {
     let n = t.substr(0, 2);
     n += i < 10 ? "0" + i + "00" : i + "00";
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     const r = this[n];
     "undefined" != typeof r &&
       e.push({
@@ -4266,12 +4272,16 @@ tdist.getLev2 = function (t) {
   return e;
 };
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 tdist.getLev3 = function (t) {
   if ("" == t) return [];
   const e = [];
   for (let i = 1; i < 100; i++) {
     let n = t.substr(0, 4);
     n += i < 10 ? "0" + i : i;
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     const r = this[n];
     "undefined" != typeof r &&
       e.push({

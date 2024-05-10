@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import { reactive, onMounted, ref } from "vue";
-const verify = ref(null);
+const verify = ref<{ getContext: (arg0: string) => any }>({ getContext: () => {} });
 const state = reactive({
   pool: "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890", // 字符串
   width: 120,
@@ -26,6 +26,8 @@ const handleDraw = () => {
 
 // 随机数
 const randomNum = (min: number, max: number) => {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   return parseInt(Math.random() * (max - min) + min);
 };
 // 随机颜色

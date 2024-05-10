@@ -50,10 +50,10 @@ const goBack = () => {
 <style lang="less" scoped>
 @import "@/style/mixin.less";
 .simple-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 10000;
+  // position: fixed;
+  // top: 0;
+  // left: 0;
+  // z-index: 10000;
   .fj();
   .wh(100%, 44px);
   line-height: 44px;

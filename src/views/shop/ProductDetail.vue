@@ -41,13 +41,13 @@
 <script setup>
 import { reactive, onMounted, nextTick } from "vue";
 import { useRouter } from "vue-router";
-import useShopInfo from "@/store/modules/shop";
+import useShopStore from "@/store/modules/shop";
 import { getDetail, addCart } from "@/api/shop";
 import sHeader from "@/components/SimpleHeader.vue";
 import { showSuccessToast } from "vant";
 import { prefix } from "@/utils";
 const router = useRouter();
-const cart = useShopInfo();
+const cart = useShopStore();
 
 const state = reactive({
   detail: {
@@ -182,3 +182,4 @@ const goToCart = async () => {
   }
 }
 </style>
+@/store/modules/user

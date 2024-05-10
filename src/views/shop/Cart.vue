@@ -58,11 +58,11 @@ import { showLoadingToast, closeToast, showFailToast } from "vant";
 import navBar from "@/components/NavBar.vue";
 import sHeader from "@/components/SimpleHeader.vue";
 
-import useShopInfo from "@/store/modules/shop";
+import useUserStore from "@/store/modules/user";
 import { getCart, deleteCartItem, modifyCart } from "@/api/shop";
 
 const router = useRouter();
-const cart = useShopInfo();
+const cart = useUserStore();
 const state = reactive({
   checked: false,
   list: [],
@@ -261,3 +261,4 @@ const allCheck = () => {
   }
 }
 </style>
+@/store/modules/user

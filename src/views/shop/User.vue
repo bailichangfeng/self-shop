@@ -40,9 +40,9 @@ import { reactive, onMounted } from "vue";
 import navBar from "@/components/NavBar.vue";
 import sHeader from "@/components/SimpleHeader.vue";
 import { useRouter } from "vue-router";
-import useShopInfo from "@/store/modules/shop";
+import useUserStore from "@/store/modules/user";
 const router = useRouter();
-const shopInfo = useShopInfo();
+const shopInfo = useUserStore();
 
 const state = reactive({
   user: {},
@@ -147,3 +147,4 @@ const goTo = (r, query) => {
   }
 }
 </style>
+@/store/modules/user

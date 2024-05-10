@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <s-header :name="type == 'login' ? '登录' : '注册'" :back="'/home'"></s-header>
+    <s-header :name="state.type == 'login' ? '登录' : '注册'" :back="'/home'"></s-header>
     <img class="logo" src="https://s.yezgea02.com/1604045825972/newbee-mall-vue3-app-logo.png" alt="" />
     <div v-if="state.type == 'login'" class="login-body login">
       <van-form @submit="onSubmit">
@@ -62,13 +62,14 @@
 </template>
 
 <script setup lang="ts">
-import md5 from "js-md5";
+import { md5 } from "js-md5";
 import { reactive, ref } from "vue";
 import sHeader from "@/components/SimpleHeader.vue";
 import vueImgVerify from "@/components/VueImageVerify.vue";
 import { showSuccessToast, showFailToast } from "vant";
 import useUserStore from "@/store/modules/user";
-const verifyRef = ref(null);
+
+const verifyRef = ref<{ state: { imgCode: string } }>({ state: { imgCode: "" } });
 const state = reactive({
   username: "17630060699",
   password: "17630060699",
@@ -79,7 +80,7 @@ const state = reactive({
   verify: ""
 });
 
-const userStore = useUserStore();
+const shopInfo = useUserStore();
 
 // 切换登录和注册两种模式
 const toggle = (v: string) => {
@@ -96,7 +97,7 @@ const onSubmit = async (values: { username: any; password: any; username1: any; 
   //   return;
   // }
   if (state.type == "login") {
-    userStore.login({ loginName: values.username, passwordMd5: md5(values.password) });
+    shopInfo.login({ loginName: values.username, passwordMd5: md5(values.password) });
     // const { data } = await login({
     //   username: values.username,
     //   passwordMd5: md5(values.password)
@@ -104,7 +105,7 @@ const onSubmit = async (values: { username: any; password: any; username1: any; 
     // 需要刷新页面，否则 axios.js 文件里的 token 不会被重置
     // window.location.href = "/";
   } else {
-    userStore.register({ loginName: values.username, password: values.username });
+    shopInfo.register({ loginName: values.username, password: values.username });
     showSuccessToast("注册成功");
     state.type = "login";
     state.verify = "";
@@ -180,3 +181,4 @@ const onSubmit = async (values: { username: any; password: any; username1: any; 
   }
 }
 </style>
+@/store/modules/user

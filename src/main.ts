@@ -2,16 +2,17 @@ import { createApp } from "vue";
 // import "./style.css";
 import App from "./App.vue";
 import router from "./router";
+import "./router/permission";
+
 import store from "./store";
+
 import SvgIcon from "@/components/common/SvgIcon.vue";
 import ElementPlus from "element-plus";
 import i18n from "./languages";
 import vant from "vant";
 import "vant/lib/index.css";
 
-import "@/utils/flexible.ts";
-
-// import "@/assets/css/reset.css";
+import "@/assets/css/reset.css";
 // element css
 import "element-plus/dist/index.css";
 // element dark css
@@ -36,3 +37,13 @@ app.config.globalProperties.$filters = {
 app.use(store).use(router).use(ElementPlus).use(i18n).use(vant);
 app.component("SvgIcon", SvgIcon);
 app.mount("#app");
+
+interface filter {
+  prefix: (url: string) => string;
+}
+
+declare module "vue" {
+  export interface ComponentCustomProperties {
+    $filters: filter;
+  }
+}

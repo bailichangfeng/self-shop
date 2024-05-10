@@ -1,9 +1,17 @@
-import { HttpRequest } from "./http";
+import { HttpRequest } from "../index";
 // import apiUrl from "./env";
 const shopHttp = new HttpRequest({
   // baseURL: apiUrl.bdcUrl
   baseURL: import.meta.env.MODE == "development" ? "//backend-api-01.newbee.ltd/api/v1" : "//backend-api-01.newbee.ltd/api/v1"
 });
+
+export const login = <T>(loginIno = { loginName: "6", passwordMd5: "6" }) => {
+  return shopHttp.post<T>("/user/login", loginIno);
+};
+
+export const register = <T>(RegisterInfo: { loginName: string; password: string }) => {
+  return shopHttp.post<T>("/user/register", RegisterInfo);
+};
 
 export const getHome = <T>() => {
   return shopHttp.get<T>("/index-infos");
@@ -80,4 +88,14 @@ export const cancelOrder = <T>(id: any) => {
 };
 export const confirmOrder = <T>(id: any) => {
   return shopHttp.put<T>(`/order/${id}/finish`);
+};
+
+export const getUserInfo = <T>() => {
+  return shopHttp.put<T>("/user/info");
+};
+export const EditUserInfo = <T>(params: any) => {
+  return shopHttp.put<T>(`/user/info`, params);
+};
+export const logout = <T>() => {
+  return shopHttp.post<T>(`/user/logout`);
 };

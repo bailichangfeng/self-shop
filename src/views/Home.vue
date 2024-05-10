@@ -1,6 +1,4 @@
 <template>
-  <!-- <HelloWorld msg="667"></HelloWorld> -->
-
   <div>
     <header class="home-header wrap" :class="{ active: state.headerScroll }">
       <router-link to="./category"><i class="nbicon nbmenu2"></i></router-link>
@@ -14,7 +12,7 @@
         <van-icon name="manager-o" />
       </router-link>
     </header>
-    <nav-bar />
+    <!-- <nav-bar /> -->
     <swiper :list="state.swiperList"></swiper>
     <div class="category-list">
       <div v-for="item in state.categoryList" :key="item.categoryId" @click="tips">
@@ -68,10 +66,10 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, onMounted, nextTick } from "vue";
+import { reactive, onMounted, nextTick, onActivated } from "vue";
 import { useRouter } from "vue-router";
 import swiper from "@/components/Swiper.vue";
-import navBar from "@/components/NavBar.vue";
+// import navBar from "@/components/NavBar.vue";
 import { getHome } from "@/api/shop";
 // import { getLocal } from "@/utils";
 // import HelloWorld from "@/components/HelloWorld.vue";
@@ -79,8 +77,8 @@ import { getHome } from "@/api/shop";
 import { showLoadingToast, closeToast, showToast } from "vant";
 
 import { Carousel, NewGoods, RecommendGoods, HotGoods, ResponseData } from "@/api/interface/shop";
-import useShopInfo from "@/store/modules/shop";
-const cart = useShopInfo();
+import useShopStore from "@/store/modules/shop";
+const cart = useShopStore();
 const router = useRouter();
 
 interface ShopInfo {
@@ -159,9 +157,18 @@ const state = reactive<ShopInfo>({
   ],
   loading: true
 });
+
+onActivated(() => {
+  console.log("onActivatedonActivated");
+});
+
 onMounted(async () => {
+  console.log("onMountedonMounted");
+
   // const token = getLocal("token");
   // if (token) {
+  console.log(cart);
+
   state.isLogin = true;
   // 获取购物车数据.
   cart.updateCart();
@@ -198,9 +205,9 @@ const tips = () => {
 <style lang="less" scoped>
 @import "@/style/mixin";
 .home-header {
-  position: fixed;
-  left: 0;
-  top: 0;
+  // position: fixed;
+  // left: 0;
+  // top: 0;
   .wh(100%, 50px);
   .fj();
   line-height: 50px;
@@ -362,3 +369,4 @@ const tips = () => {
   }
 }
 </style>
+@/store/modules/user

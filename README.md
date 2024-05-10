@@ -38,3 +38,37 @@ VSCode 插件：TypeScript Vue Plugin (Volar)、Vue Language Features (Volar)、
 
 **vite.config.ts**
 
+
+
+// 无用依赖
+better-scroll
+vue-i18n
+vant 应该用不着
+
+
+// 业务流程
+未登录
+
+
+
+已登录
+
+
+
+// 项目
+1. 封装axios
+2. 封装路由
+3. 封装pinia
+4. 封装路由守卫
+5. 封装全局方法
+6. 封装全局组件
+7. 封装全局指令
+8. 封装全局过滤器
+9. 封装全局混入
+10. 封装全局插件
+11. 封装全局配置
+12. 封装全局hooks
+13. 封装全局常量
+14. 封装全局枚举
+15. 封装全局工具类
+16. 封装全局错误处理

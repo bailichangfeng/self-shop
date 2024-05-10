@@ -29,14 +29,25 @@ export interface GlobalState {
 
 /* UserState */
 export interface UserState {
-  userInfo: { realname: string; bdcId: string | null };
+  userInfo: { introduceSign: string; loginName: string | null; nickName: string | null };
   token: string | null;
+}
+
+export interface ShopUserState {
+  token: string | null;
+  shopUserInfo: ShopUserInfo;
 }
 
 export interface ShopState {
   count: number;
+}
 
-  shopUserInfo: ShopUserInfo;
+export interface GameState {
+  currentGame: string;
+  gameOptions: {
+    label: string;
+    value: string;
+  }[];
 }
 
 /* tabsMenuProps */
